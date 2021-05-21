@@ -1,5 +1,5 @@
 from app import app
-from models import Pet
+from models import db, Pet
 
 
 db.drop_all()

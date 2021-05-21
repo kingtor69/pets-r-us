@@ -4,7 +4,7 @@ from models import db, connect_db, Pet
 
 app = Flask(__name__)
 
-app.config['SEQALCHEMY_DATABASE_ORI'] = 'postgresql:///pets_r_us_db'
+app.config['SEQALCHEMY_DATABASE_URI'] = 'postgresql:///pets_r_us_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
