@@ -1,15 +1,52 @@
 {% extends 'base.html' %}
-{% block tab_title %}{% endblock %}
-{% block static_path %}{% endblock %}
+{% block tab_title %}Pets-<span class="reverse">R</span>-Us{% endblock %}
+{% block static_path %}../{% endblock %}
 {% block page_sytle %}{% endblock %}
-{% block home_path %}{% endblock %}
+{% block home_path %}../{% endblock %}
 {% block nav_items %}{% endblock %}
-{% block header %}{% endblock %}
+{% block header %}Pets-<span class="reverse">R</span>-Us{% endblock %}
 
 {% block content %}
+  <div class="container">
+    {% if any_pets_avail %}
+      <div class="row">
+        <h2 class="text-center pb-3 text-success"><b>We have pets available for adoption!</b></h2>
+      </div>
+    {% endif %}
+    <div class="container">
 
+      <div class="row justify-content-around">
+        {% for pet in pets %}
+        <div class="col pb-4">
+          <div class="card bg-dark text-light">
+            <h3 class="card-title">{{ pet.name }}</h3>
+            <h5 class="card-subtitle mb-2">{{ pet.species }}</h5>
+            <div class="card-body">
+              {% if pet.photo_url %}
+              <img src="{{ pet.photo_url }}" alt="{{ pet.name }} photo" class="card-img-top image-fluid">
+              {% endif %}
+              <p class="card-text">
+                {% if pet.notes %}
+                {{ pet.notes }}<br>
+                {% endif %}
+                {% if pet.age %}
+                {{ pet.age }} {% if pet.is_years %}years{% else %}months{% endif %} old<br>
+                {% endif %}                  
+                {% if pet.is_available %}
+                <h3 class="text-success happy-font border-success rounded text-center"><b>AVAILBLE!</b></h3>
+                {% else %}
+                <h5 class="text-muted text-center">unavailable</h5>
+                {% endif %}
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block scripts_before %}{% endblock %}
-{% block scripts_path %}{% endblock %}
+{% block scripts_path %}../{% endblock %}
 {% block scripts_after %}{% endblock %}

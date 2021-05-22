@@ -13,12 +13,13 @@ class Pet(db.Model):
 
     def __repr__(self):
         """display Pet-modelled object"""
-        return f"<id={self.id} name={self.name} species = {self.species} age={self.age} available={self.available} notes={self.notes} photo_url={self.photo_url}"
+        return f"<id={self.id} name={self.name} species = {self.species} age={self.age} is_available={self.is_available} notes={self.notes} photo_url={self.photo_url}"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, nullable=False)
     species = db.Column(db.String, nullable=False)
     photo_url = db.Column(db.String)
-    age = db.Column(db.Float)
+    age = db.Column(db.Integer)
+    is_years = db.Column(db.Boolean, default=True)
     notes = db.Column(db.String)
-    available = db.Column(db.Boolean, nullable=False, default=True)
+    is_available = db.Column(db.Boolean, nullable=False, default=True)

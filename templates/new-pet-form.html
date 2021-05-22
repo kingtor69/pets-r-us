@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block tab_title %}Pets-<span class="reverse">R</span>-Us{% endblock %}
+{% block static_path %}../../{% endblock %}
+{% block page_sytle %}{% endblock %}
+{% block home_path %}../../{% endblock %}
+{% block nav_items %}{% endblock %}
+{% block header %}Pets-<span class="reverse">R</span>-Us{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <form>
+      {% for field in form 
+        if field.widget.input_type != 'hidden' %}
+        <div class="form-group">
+          {{ field.label }}
+          {{ field }}
+          {% for err in field.errors %}
+            <small class="text-warning">
+              {{ err }}
+            </small>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Add This Pet</button>
+    </form>
+  </div>
+
+
+{% endblock %}
+
+{% block scripts_before %}{% endblock %}
+{% block scripts_path %}../../{% endblock %}
+{% block scripts_after %}{% endblock %}
