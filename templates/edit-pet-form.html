@@ -9,40 +9,7 @@
 {% block content %}
   <div class="container">
     <form action="/{{ pet.id }}", method="POST" novalidate>
-      {{ form.hidden_tag() }}
-      <div class="container">
-        <div class="row justify-content-around">
-          <div class="d-sm-none d-md-block col col-md-2"></div>
-          <div class="col col-md-8">
-            {% for field in form 
-              if field.widget.input_type != 'hidden' %}
-              <div class=" row py-2">
-                <div class="col-6">{{ field.label }}</div>
-                <div class="col-6">{{ field(class_="bg-dark text-light border-info rounded") }}</div>
-              </div>
-              {% for err in field.errors %}
-                <div class="row pb-2">
-                  <div class="col">
-                    <small class="text-warning">
-                      {{ err }}
-                    </small>
-                  </div>
-                </div>
-              {% endfor %}
-            {% endfor %}
-            <div class="row py-4">
-              <div class="col-6"></div>
-              <div class="col-6">
-                <button type="submit" class="btn btn-primary">Edit This Pet</button>
-              </div>
-            </div>
-          </div>
-          <div class="d-sm-none d-md-block col col-md-2"></div>
-        </div>
-        <div class="row justify-content center">
-          <div class="col d-block text-center"><a href="/" class="btn btn-outline-primary">return to home page</a></div>
-        </div>
-      </div>
+      {% include 'pet-form.j2' %}
     </form>
   </div>
 

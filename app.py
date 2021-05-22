@@ -16,14 +16,6 @@ toolbar = DebugToolbarExtension(app)
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 @app.route('/')
-# def show_home_page():
-#     """show all pets' pictures, names and adoption status"""
-#     pets = Pet.query.all()
-#     any_pets_avail = False
-#     for pet in pets:
-#         if pet.is_available:
-#             any_pets_avail = True
-#     return render_template('home.html', pets=pets, any_pets_avail=any_pets_avail)
 def show_sorted_home_page():
     """sort pets in to adoptable (first) and unadoptable (second), then display pictures and names along with that adoption status"""
     avail_pets = Pet.query.filter_by(is_available=True)
@@ -38,15 +30,13 @@ def add_new_pet():
     """Displays a new pet form and then adds the returned data, if authenticated, to the database. Reloads form if data is not valid."""
     form = PetForm(is_years=True, is_available=True)
     if form.validate_on_submit():
-        name = form.name.data
-        species = form.species.data
-        photo_url = form.photo_url.data
-        age = form.age.data
-        is_years = form.is_years.data
-        notes = form.notes.data
-        is_available = form.is_available.data
         # there's gotta be an easier way to do this, right?
-        pet = Pet(name=name, species=species, photo_url=photo_url, age=age, is_years=is_years, notes=notes, is_available=is_available)
+        # pet = Pet(name=form.name.data, species=form.species.data, photo_url=form.photo_url.data, age=form.age.data, is_years=form.is_years.data, notes=form.notes.data, is_available=form.is_available.data)
+
+        # well, it turns out there is:
+        data = {key: value for key, value in form.data.items() if key !="csrf_token"}
+        pet = Pet(**data)
+
         db.session.add(pet)
         db.session.commit()
         flash(f'Successfully added {pet.name}', 'success')

@@ -4,10 +4,26 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+h1 {
+	font-family: 'Comic Neue', cursive;
+	font-size: 64px;
+}
 .reverse {
+	display: inline-block;
+	vertical-align: top;
 	transform: scale(-1, 1);
+	-ms-filter: reverse;
+	filter: reverse;
 }
 
 .happy-font {
 	font-family: 'Goblin One', cursive;
+}
+
+a.card:hover {
+	border: green 1px solid;
+}
+
+a.card:active {
+	border: yellow 1px solid;
 }
