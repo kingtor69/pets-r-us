@@ -2,3 +2,4 @@ venv/
 __pycahce__/
 delete_me.py
 templates/delete_me.html
+templates/pet-form.js
