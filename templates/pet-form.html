@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block tab_title %}Pets-<span class="reverse">R</span>-Us{% endblock %}
+{% block static_path %}../../{% endblock %}
+{% block page_sytle %}{% endblock %}
+{% block home_path %}../../{% endblock %}
+{% block nav_items %}{% endblock %}
+{% block header %}Pets-<span class="reverse">R</span>-Us{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <form action="/add", method="POST" novalidate>
+      {{ form.hidden_tag() }}
+      <div class="container">
+        <div class="row justify-content-around">
+          <div class="d-sm-none d-md-block col col-md-2"></div>
+          <div class="col col-md-8">
+            {% for field in form 
+              if field.widget.input_type != 'hidden' %}
+              <div class=" row py-2">
+                <div class="col-6">{{ field.label }}</div>
+                <div class="col-6">{{ field(class_="bg-dark text-light border-info rounded") }}</div>
+              </div>
+              {% for err in field.errors %}
+                <div class="row pb-2">
+                  <div class="col">
+                    <small class="text-warning">
+                      {{ err }}
+                    </small>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endfor %}
+            <div class="row py-4">
+              <div class="col-6"></div>
+              <div class="col-6">
+                <button type="submit" class="btn btn-primary">Add This Pet</button>
+              </div>
+            </div>
+          </div>
+          <div class="d-sm-none d-md-block col col-md-2"></div>
+        </div>
+        <div class="row justify-content center">
+          <div class="col"><a href="/" class="btn btn-outline-primary">return to home page</a></div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+{% endblock %}
+
+{% block scripts_before %}{% endblock %}
+{% block scripts_path %}../../{% endblock %}
+{% block scripts_after %}{% endblock %}

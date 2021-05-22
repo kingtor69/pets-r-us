@@ -1,7 +1,7 @@
 from flask import Flask,request,redirect,render_template
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Pet
-# from forms import AddPetForm
+from forms import PetForm
 
 app = Flask(__name__)
 
@@ -24,12 +24,28 @@ def show_home_page():
             any_pets_avail = True
     return render_template('home.html', pets=pets, any_pets_avail=any_pets_avail)
 
-@app.route('/pets/new', methods = ["GET", "POST"])
+@app.route('/add', methods = ["GET", "POST"])
 def add_new_pet():
-    form = AddPetForm(is_years=True, is_available=True)
+    """Displays a new pet form and then adds the returned data, if authenticated, to the database. Reloads form if data is not valid."""
+    form = PetForm(is_years=True, is_available=True)
     if form.validate_on_submit():
-        # do some fucking thing
+        name = form.name.data
+        species = form.species.data
+        photo_url = form.photo_url.data
+        age = form.age.data
+        is_years = form.is_years.data
+        notes = form.notes.data
+        is_available = form.is_available.data
+        # there's gotta be an easier way to do this, right?
+        pet = Pet(name=name, species=species, photo_url=photo_url, age=age, is_years=is_years, notes=notes, is_available=is_available)
+        db.session.add(pet)
+        db.session.commit()
         return redirect('/')
     else:
-        return render_template('new-pet-form.html')
+        return render_template('pet-form.html', form=form)
 
+@app.route("/<int: id>", methods=['GET', 'POST'])
+def display_pet_info():
+    """displays a card of pet information and an edit button to change that information"""
+    pet = Pet.query.get(id)
+    return render_template('pet-info', pet=pet)

@@ -13,25 +13,22 @@
         <h2 class="text-center pb-3 text-success"><b>We have pets available for adoption!</b></h2>
       </div>
     {% endif %}
+    <div class="row justify-content-around">
+      <div class="col col-md-6 col-lg-4 text-center pb-4">
+        <a href="/add" class="btn btn-info btn-lg">Add a New Pet</a>
+      </div>
+    </div>
     <div class="container">
-
       <div class="row justify-content-around">
         {% for pet in pets %}
-        <div class="col pb-4">
-          <div class="card bg-dark text-light">
-            <h3 class="card-title">{{ pet.name }}</h3>
-            <h5 class="card-subtitle mb-2">{{ pet.species }}</h5>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-4">
+          <a href="/{{ pet.id }}" class="card bg-dark text-light">
             <div class="card-body">
               {% if pet.photo_url %}
               <img src="{{ pet.photo_url }}" alt="{{ pet.name }} photo" class="card-img-top image-fluid">
               {% endif %}
               <p class="card-text">
-                {% if pet.notes %}
-                {{ pet.notes }}<br>
-                {% endif %}
-                {% if pet.age %}
-                {{ pet.age }} {% if pet.is_years %}years{% else %}months{% endif %} old<br>
-                {% endif %}                  
+                <h4 class="text-center">{{ pet.name }}</h4>
                 {% if pet.is_available %}
                 <h3 class="text-success happy-font border-success rounded text-center"><b>AVAILBLE!</b></h3>
                 {% else %}
@@ -39,7 +36,7 @@
                 {% endif %}
               </p>
             </div>
-          </div>
+          </a>
         </div>
         {% endfor %}
       </div>

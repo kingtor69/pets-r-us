@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block tab_title %}{{ pet.name }}{% endblock %}
+{% block static_path %}../{% endblock %}
+{% block page_sytle %}{% endblock %}
+{% block home_path %}../{% endblock %}
+{% block nav_items %}{% endblock %}
+{% block header %}{{ pet.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-md-4 col-lg-3">
+      <div class="card bg-dark text-light">
+        <h3 class="card-title">{{ pet.name }}</h3>
+        <h5 class="card-subtitle mb-2">{{ pet.species }}</h5>
+        <div class="card-body">
+          {% if pet.photo_url %}
+          <img src="{{ pet.photo_url }}" alt="{{ pet.name }} photo" class="card-img-top image-fluid">
+          {% endif %}
+          <p class="card-text">
+            {% if pet.notes %}
+            {{ pet.notes }}<br>
+            {% endif %}
+            {% if pet.age %}
+            {{ pet.age }} {% if pet.is_years %}years{% else %}months{% endif %} old<br>
+            {% endif %}                  
+            {% if pet.is_available %}
+            <h3 class="text-success happy-font border-success rounded text-center"><b>AVAILBLE!</b></h3>
+            {% else %}
+            <h5 class="text-muted text-center">unavailable</h5>
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts_before %}{% endblock %}
+{% block scripts_path %}../{% endblock %}
+{% block scripts_after %}{% endblock %}
